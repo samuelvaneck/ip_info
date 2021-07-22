@@ -15,3 +15,8 @@ Run in development:
 ```
   ruby lib/ip.rb
 ```
+
+Get the extrnal IP address
+```
+  curl http://localhost:4567
+```
