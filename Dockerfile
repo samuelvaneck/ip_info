@@ -6,7 +6,7 @@ RUN bundle config set deployment 'true'
 
 WORKDIR /app
 COPY . /app
-RUN bundle install
+RUN bundle install --without development
 
 EXPOSE 4567
 

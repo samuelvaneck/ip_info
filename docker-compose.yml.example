@@ -10,6 +10,8 @@ services:
       - LETSENCRYPT_HOST=ip.zeap.io
       - LETSENCRYPT_EMAIL=samuelvaneck@gmail.com
       - HTTPS_METHOD=noredirect
+    volumes:
+      - ./db:/app/lib/db
 
 networks:
   default:
