@@ -3,7 +3,6 @@
 require 'json'
 require 'maxmind/db'
 require 'sinatra'
-require 'pry'
 
 get '/' do
   location = ip_location_info(request.ip)
