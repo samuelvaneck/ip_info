@@ -9,6 +9,9 @@ Run with docker:
 
   # run docker container:
   docker run -p 80:4567 ip
+
+  # push not image to repository
+  ./build_push.sh
 ```
 
 Run in development:
