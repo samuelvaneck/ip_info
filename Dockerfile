@@ -1,5 +1,9 @@
 FROM ruby:3.0.2-alpine3.14
 
+RUN apk update && apk add --no-cache build-base
+
+RUN bundle config set deployment 'true'
+
 WORKDIR /app
 COPY . /app
 RUN bundle install

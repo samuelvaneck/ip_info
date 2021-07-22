@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
-require 'lib/ip'
+require 'bundler'
+require_relative 'lib/ip'
 
 run Sinatra::Application
