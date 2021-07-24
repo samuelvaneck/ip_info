@@ -1,6 +1,7 @@
 <html>
   <head>
     <title> <%= @remote_ip %> | By zeap.io</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
       // Initialize and add the map
       function initMap() {
@@ -38,9 +39,10 @@
         transform: translate(-50%, -50%);
         border: 3px solid #2a6bcc;
         border-radius: 8px;
-        padding: 20px 90px 20px 90px;
+        padding: 2% 8% 2% 8%;
         z-index: 100;
         text-align: center;
+        opacity: 0.8
       }
       #ip {
         font-size: 2em;
@@ -48,6 +50,13 @@
       #location {
         font-size: 0.8em;
         transform: translate(0%, 25%)
+      }
+
+      /* On screens that are 600px or less, set the background color to olive */
+      @media screen and (max-width: 800px) {
+        #ip-wrapper {
+          padding: 5% 20% 5% 20%;
+        }
       }
     </style>
   <head>
