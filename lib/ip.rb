@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
+require 'dotenv/load'
 require 'json'
 require 'maxmind/db'
 require 'sinatra'
 require 'erb'
-if development?
-  require 'pry'
-end
 
 Tilt.register Tilt::ERBTemplate, 'html.erb'
 
@@ -15,6 +13,7 @@ get '/' do
   @location = ip_location_info(@remote_ip)
 
   if request.accept.map(&:entry).include?('text/html')
+    set_lat_long unless @location.empty?
     erb :ip, { layout: :application }
   else
     { "ip": @remote_ip }.merge(@location).to_json
@@ -42,4 +41,9 @@ def ip_location_info(remote_ip)
   reader.close
 
   location
+end
+
+def set_lat_long
+  @latitude = @location[:coordinate][:latitude]
+  @longitude = @location[:coordinate][:longitude]
 end

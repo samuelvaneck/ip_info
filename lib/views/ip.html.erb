@@ -1,2 +1,12 @@
-<%= @remote_ip %>
-<%= @location %>
+<div id="content">
+  <div id='map' data-lat="<%= @latitude %>" data-lng="<%= @longitude %>"></div>
+
+  <div id='ip-wrapper'>
+    <div id='ip'><%= @remote_ip %></div>
+    <div id='location'><%= @location[:city] %> | <%= @location[:country] %><%#= @latitude %><%#= @longitude %></div>
+  </div>
+</div>
+
+<script async src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS_KEY'] %>&callback=initMap">
+</script>
+
