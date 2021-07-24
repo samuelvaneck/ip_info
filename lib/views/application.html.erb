@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <title> <%= @remote_ip %> | By zeap.io</title>
+    <script>
+      // Initialize and add the map
+      function initMap() {
+        // The location of Uluru
+        const lat = Number(document.getElementById('map').dataset.lat);
+        const lng = Number(document.getElementById('map').dataset.lng);
+        const uluru = { lat: lat, lng: lng };
+        // The map, centered at Uluru
+        const map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 14,
+          center: uluru,
+        });
+      }
+    </script>
+    <style>
+      body {
+        margin: 0px;
+        font-family: sans-serif;
+      }
+      #content {
+        position: relative;
+      }
+      #map {
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+        opacity: 0.8;
+      }
+      #ip-wrapper {
+        background: #FFF;
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 3px solid #2a6bcc;
+        border-radius: 8px;
+        padding: 20px 90px 20px 90px;
+        z-index: 100;
+        text-align: center;
+      }
+      #ip {
+        font-size: 2em;
+      }
+      #location {
+        font-size: 0.8em;
+        transform: translate(0%, 25%)
+      }
+    </style>
+  <head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>

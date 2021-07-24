@@ -2,6 +2,12 @@
 
 Small Sinatra app to get the extranal IP of a the request
 
+The app use MaxMind GeoLite2-City database. Download it from their website.
+
+```
+curl -I 'https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=GEO_IP_LICENSE_KEY&suffix=tar.gz'
+```
+
 Run with docker:
 ```
   # build docker container:

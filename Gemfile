@@ -2,6 +2,7 @@
 
 source 'https://rubygems.org'
 
+gem 'dotenv'
 gem 'maxmind-db'
 gem 'puma'
 gem 'sinatra'
