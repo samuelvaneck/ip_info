@@ -1,0 +1,45 @@
+body {
+  margin: 0px;
+  font-family: sans-serif;
+}
+
+#content {
+  position: relative;
+}
+
+#map {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  opacity: 0.8;
+}
+
+#ip-wrapper {
+  background: #FFF;
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 3px solid #2a6bcc;
+  border-radius: 8px;
+  padding: 2% 8% 2% 8%;
+  z-index: 100;
+  text-align: center;
+  opacity: 0.8
+}
+
+#ip {
+  font-size: 2em;
+}
+
+#location {
+  font-size: 0.8em;
+  transform: translate(0%, 25%)
+}
+
+@media screen and (max-width: 800px) {
+  #ip-wrapper {
+    padding: 5% 20% 5% 20%;
+  }
+}
