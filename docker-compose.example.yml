@@ -1,0 +1,29 @@
+services:
+  web:
+    image: ghcr.io/samuelvaneck/ip:latest
+    hostname: ip_web
+    ports:
+      - 8082:4567
+    environment: &envs
+      - GOOGLE_MAPS_KEY=some_key
+      - HTTPS_METHOD=noredirect
+      - LETSENCRYPT_EMAIL=youremailaddress@host.com
+      - LETSENCRYPT_HOST=website.url
+      - VIRTUAL_HOST=website.url
+      - VIRTUAL_PORT=8082
+    volumes:
+      - ./db:/app/lib/db
+
+  geo_updater:
+    hostname: geo_updater
+    image: ghcr.io/samuelvaneck/geo_lite_updater:latest
+    environment:
+      - CRON_SCHEDULE="0 4 * * 5"
+      - GEO_IP_LICENSE_KEY=some_key
+    volumes:
+      - ./db:/db
+
+networks:
+  default:
+    external:
+      name: proxy
