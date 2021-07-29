@@ -48,7 +48,10 @@ def isp_info(remote_ip)
 
   reader = MaxMind::DB.new(File.join(File.dirname(__FILE__), './db/GeoLite2-ASN.mmdb'), mode: MaxMind::DB::MODE_FILE)
   record = reader.get(remote_ip)
-  { "isp": record['autonomous_system_organization'] }
+  isp = { "isp": record['autonomous_system_organization'] }
+  reader.close
+
+  isp
 end
 
 def set_lat_long
