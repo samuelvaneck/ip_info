@@ -11,7 +11,6 @@ Tilt.register Tilt::ERBTemplate, 'html.erb'
 get '/' do
   @remote_ip = request.params['ip'] || request.ip
   @location = location_info(@remote_ip)
-  # @isp = isp_info(@remote_ip)
 
   if request.accept.map(&:entry).include?('text/html')
     set_lat_long unless @location.empty?
@@ -43,6 +42,10 @@ def location_info(remote_ip)
   location
 end
 
+def city(record)
+  record['city'] ? { 'city': record['city']['names']['en'] } : {}
+end
+
 def isp_info(remote_ip)
   return {} unless /\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}/.match?(remote_ip)
 
@@ -57,8 +60,4 @@ end
 def set_lat_long
   @latitude = @location[:coordinate][:latitude]
   @longitude = @location[:coordinate][:longitude]
-end
-
-def city(record)
-  record['city'] ? { 'city': record['city']['names']['en'] } : {}
 end
