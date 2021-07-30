@@ -5,7 +5,6 @@ require 'json'
 require 'maxmind/db'
 require 'sinatra'
 require 'erb'
-require 'pry'
 require_relative 'geo_lite_reader'
 
 Tilt.register Tilt::ERBTemplate, 'html.erb'
