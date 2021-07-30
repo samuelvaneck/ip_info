@@ -5,6 +5,8 @@ require 'json'
 require 'maxmind/db'
 require 'sinatra'
 require 'erb'
+require 'pry'
+require_relative 'geo_lite_reader'
 
 Tilt.register Tilt::ERBTemplate, 'html.erb'
 
@@ -23,23 +25,20 @@ end
 def location_info(remote_ip)
   return {} unless /\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}/.match?(remote_ip)
 
-  reader = MaxMind::DB.new(File.join(File.dirname(__FILE__), './db/GeoLite2-City.mmdb'), mode: MaxMind::DB::MODE_FILE)
-  record = reader.get(remote_ip)
-  location = if record.nil?
-               puts "#{remote_id} was not found in the database"
-               {}
-             else
-               {
-                 "country": record['country']['names']['en'],
-                 "coordinate": {
-                   "latitude": record['location']['latitude'],
-                   "longitude": record['location']['longitude']
-                 }
-               }.merge(city(record)).merge(isp_info(remote_ip))
-             end
-  reader.close
+  record = GeoLiteReader.new('GeoLite2-City').record(remote_ip)
+  location(record).merge(city(record)).merge(isp_info(remote_ip))
+end
 
-  location
+def location(record)
+  return {} if record.nil?
+
+  {
+    "country": record['country']['names']['en'],
+    "coordinate": {
+      "latitude": record['location']['latitude'],
+      "longitude": record['location']['longitude']
+    }
+  }
 end
 
 def city(record)
@@ -49,12 +48,8 @@ end
 def isp_info(remote_ip)
   return {} unless /\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}/.match?(remote_ip)
 
-  reader = MaxMind::DB.new(File.join(File.dirname(__FILE__), './db/GeoLite2-ASN.mmdb'), mode: MaxMind::DB::MODE_FILE)
-  record = reader.get(remote_ip)
-  isp = { "isp": record['autonomous_system_organization'] }
-  reader.close
-
-  isp
+  record = GeoLiteReader.new('GeoLite2-ASN').record(remote_ip)
+  { "isp": record['autonomous_system_organization'] }
 end
 
 def set_lat_long
