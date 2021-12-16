@@ -22,7 +22,7 @@ Run with docker:
 
 Run in development:
 ```
-  ruby lib/ip.rb
+  ruby lib/app.rb
 ```
 
 Get the extrnal IP address
