@@ -1,4 +1,4 @@
-FROM ruby:3.0.3-alpine3.15
+FROM ruby:3.1.1-alpine3.15
 
 RUN apk update && apk add --no-cache build-base
 
