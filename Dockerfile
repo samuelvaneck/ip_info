@@ -1,6 +1,9 @@
 FROM ruby:3.1.1-alpine3.15
 
-RUN apk --update add --no-cache build-base curl curl-dev
+RUN apk update
+RUN apk upgrade
+RUN apk --no-cache add build-base
+RUN apk --no-cache add curl
 
 RUN bundle config set deployment 'true'
 
