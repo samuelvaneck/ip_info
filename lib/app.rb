@@ -20,9 +20,9 @@ get '/' do
     "#{JSON.pretty_generate({ "ip": @remote_ip }.merge(@location))} \n"
   end
 rescue StandardError => e
-  puts request
+  puts request.inpsect
   puts ' '
-  puts "🚑 Whambulance because of #{e.try(:message)}"
+  puts "🚑 Whambulance because of #{e.message}"
   puts ' '
 end
 
