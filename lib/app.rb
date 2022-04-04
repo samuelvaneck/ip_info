@@ -19,11 +19,11 @@ get '/' do
   else
     "#{JSON.pretty_generate({ "ip": @remote_ip }.merge(@location))} \n"
   end
-rescue StandarError => e
+rescue StandardError => e
   puts request
-  puts " "
+  puts ' '
   puts "🚑 Whambulance because of #{e.try(:message)}"
-  puts " "
+  puts ' '
 end
 
 def location_info(remote_ip)
