@@ -41,6 +41,8 @@ def location(record)
 end
 
 def city(record)
+  return {} if record.nil?
+
   record['city'] ? { 'city': record['city']['names']['en'] } : {}
 end
 
