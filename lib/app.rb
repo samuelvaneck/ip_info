@@ -1,10 +1,16 @@
 # frozen_string_literal: true
 
+require 'sinatra/base'
 require 'json'
 require 'maxmind/db'
 require 'sinatra'
 require 'erb'
 require_relative 'geo_lite_reader'
+
+if Sinatra::Base.development?
+  require 'dotenv/load'
+  require 'pry'
+end
 
 Tilt.register Tilt::ERBTemplate, 'html.erb'
 
