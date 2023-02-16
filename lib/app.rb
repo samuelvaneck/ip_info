@@ -20,10 +20,8 @@ get '/' do
     "#{JSON.pretty_generate({ "ip": @remote_ip }.merge(@location))} \n"
   end
 rescue StandardError => e
-  puts request.inspect
-  puts ' '
-  puts "🚑 Whambulance because of #{e.message}"
-  puts ' '
+  logger = Logger.new($stdout, Logger::INFO)
+  logger.error(e.message)
 end
 
 def location_info(remote_ip)
