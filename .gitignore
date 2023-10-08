@@ -2,3 +2,4 @@
 .env
 /lib/db/GeoLite2-City.mmdb
 /lib/db/GeoLite2-ASN.mmdb
+.idea/
