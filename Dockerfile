@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 ruby:3.2.2-alpine3.17
+FROM --platform=linux/amd64 ruby:3.2.2-alpine3.18
 
 RUN apk update
 RUN apk upgrade
