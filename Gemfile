@@ -2,10 +2,11 @@
 
 source 'https://rubygems.org'
 
-ruby '3.2.2'
+ruby '3.3.0'
 
 gem 'maxmind-db'
 gem 'puma'
+gem 'rackup'
 gem 'sinatra'
 
 group :development do
