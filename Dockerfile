@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 ruby:3.3.6-alpine3.20
+FROM --platform=linux/amd64 ruby:3.4.2-alpine3.21
 
 RUN apk update
 RUN apk upgrade
@@ -9,7 +9,8 @@ RUN bundle config set deployment 'true'
 
 WORKDIR /app
 COPY . /app
-RUN bundle install --without development
+RUN bundle config set --local without 'development'
+RUN bundle install
 
 EXPOSE 4567
 
