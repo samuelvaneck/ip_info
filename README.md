@@ -10,30 +10,32 @@ curl -I 'https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Cit
 
 ## Curl usage
 
+Use the `https://` URL — port 80 redirects to HTTPS and curl won't follow the redirect by default (you'd just see `Found`). Add `-L` if you prefer the bare hostname.
+
 Plain-text IP (curl, wget, HTTPie, fetch, etc. detected via `User-Agent`):
 
 ```
-$ curl https://your-host/
+$ curl https://ip.samuelvaneck.com/
 1.2.3.4
 ```
 
 Individual fields:
 
 ```
-$ curl https://your-host/country
+$ curl https://ip.samuelvaneck.com/country
 Netherlands
 
-$ curl https://your-host/city
+$ curl https://ip.samuelvaneck.com/city
 Amsterdam
 
-$ curl https://your-host/isp
+$ curl https://ip.samuelvaneck.com/isp
 Example ISP B.V.
 ```
 
 Full JSON response (also returned for any non-browser client other than curl-likes):
 
 ```
-$ curl https://your-host/json
+$ curl https://ip.samuelvaneck.com/json
 {
   "ip": "1.2.3.4",
   "country": "Netherlands",
@@ -43,11 +45,31 @@ $ curl https://your-host/json
 }
 ```
 
-Look up another IP:
+Look up another IP via the `?ip=` query param:
 
 ```
-$ curl 'https://your-host/?ip=8.8.8.8'
-$ curl 'https://your-host/json?ip=8.8.8.8'
+$ curl 'https://ip.samuelvaneck.com/?ip=8.8.8.8'
+8.8.8.8
+
+$ curl 'https://ip.samuelvaneck.com/json?ip=8.8.8.8'
+{
+  "ip": "8.8.8.8",
+  "country": "United States",
+  "coordinate": { "latitude": 37.751, "longitude": -97.822 },
+  "isp": "GOOGLE"
+}
+
+$ curl 'https://ip.samuelvaneck.com/isp?ip=8.8.8.8'
+GOOGLE
+```
+
+If a field can't be resolved (e.g. a private/unknown IP), the response is empty for the field endpoints, and the JSON endpoint omits the missing keys:
+
+```
+$ curl 'https://ip.samuelvaneck.com/json?ip=10.0.0.1'
+{
+  "ip": "10.0.0.1"
+}
 ```
 
 ## Run with Docker
