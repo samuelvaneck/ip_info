@@ -39,9 +39,15 @@ $ curl https://ip.samuelvaneck.com/json
 {
   "ip": "1.2.3.4",
   "country": "Netherlands",
+  "country_code": "NL",
+  "region": "North Holland",
+  "region_code": "NH",
+  "postal_code": "1012",
+  "timezone": "Europe/Amsterdam",
   "coordinate": { "latitude": 52.37, "longitude": 4.89 },
   "city": "Amsterdam",
-  "isp": "Example ISP B.V."
+  "isp": "Example ISP B.V.",
+  "asn": 12345
 }
 ```
 
@@ -55,8 +61,11 @@ $ curl 'https://ip.samuelvaneck.com/json?ip=8.8.8.8'
 {
   "ip": "8.8.8.8",
   "country": "United States",
+  "country_code": "US",
+  "timezone": "America/Chicago",
   "coordinate": { "latitude": 37.751, "longitude": -97.822 },
-  "isp": "GOOGLE"
+  "isp": "GOOGLE",
+  "asn": 15169
 }
 
 $ curl 'https://ip.samuelvaneck.com/isp?ip=8.8.8.8'

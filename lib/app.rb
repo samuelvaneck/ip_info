@@ -80,26 +80,42 @@ end
 def location(record)
   return {} if record.nil?
 
+  subdivision = record['subdivisions']&.first
   {
-    "country": record['country']['names']['en'],
-    "coordinate": {
-      "latitude": record['location']['latitude'],
-      "longitude": record['location']['longitude']
-    }
-  }
+    country: record.dig('country', 'names', 'en'),
+    country_code: record.dig('country', 'iso_code'),
+    region: subdivision&.dig('names', 'en'),
+    region_code: subdivision&.dig('iso_code'),
+    postal_code: record.dig('postal', 'code'),
+    timezone: record.dig('location', 'time_zone'),
+    coordinate: coordinate(record)
+  }.compact
+end
+
+def coordinate(record)
+  lat = record.dig('location', 'latitude')
+  lng = record.dig('location', 'longitude')
+  return nil unless lat && lng
+
+  { latitude: lat, longitude: lng }
 end
 
 def city(record)
   return {} if record.nil?
 
-  record['city'] ? { 'city': record['city']['names']['en'] } : {}
+  record['city'] ? { city: record['city']['names']['en'] } : {}
 end
 
 def isp_info(remote_ip)
   return {} unless /\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}/.match?(remote_ip)
 
   record = GeoLiteReader.new('GeoLite2-ASN').record(remote_ip)
-  { "isp": record['autonomous_system_organization'] }
+  return {} if record.nil?
+
+  {
+    isp: record['autonomous_system_organization'],
+    asn: record['autonomous_system_number']
+  }.compact
 end
 
 def set_lat_long

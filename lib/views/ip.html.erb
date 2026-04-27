@@ -13,17 +13,21 @@
         </svg>
       </button>
     </div>
-    <% locality = [@location[:city], @location[:country]].compact %>
+    <% place = [@location[:city], @location[:region]].compact.join(', ') %>
+    <% locality = [place.empty? ? nil : place, @location[:country]].compact %>
     <% if locality.any? %>
       <div id='location'><%= locality.join(' • ') %></div>
     <% end %>
-    <% if @location[:isp] || (@latitude && @longitude) %>
+    <% meta_rows = [
+      (['ISP', [@location[:isp], @location[:asn] && "AS#{@location[:asn]}"].compact.join(' · ')] if @location[:isp]),
+      (['Postal', @location[:postal_code]] if @location[:postal_code]),
+      (['Timezone', @location[:timezone]] if @location[:timezone]),
+      ((['Coords', format('%.4f, %.4f', @latitude, @longitude)]) if @latitude && @longitude)
+    ].compact %>
+    <% if meta_rows.any? %>
       <dl id='meta'>
-        <% if @location[:isp] %>
-          <dt>ISP</dt><dd><%= @location[:isp] %></dd>
-        <% end %>
-        <% if @latitude && @longitude %>
-          <dt>Coords</dt><dd><%= format('%.4f, %.4f', @latitude, @longitude) %></dd>
+        <% meta_rows.each do |label, value| %>
+          <dt><%= label %></dt><dd><%= value %></dd>
         <% end %>
       </dl>
     <% end %>
