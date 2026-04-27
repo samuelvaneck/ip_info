@@ -1,11 +1,13 @@
-<html>
+<!DOCTYPE html>
+<html lang='en'>
   <head>
-    <title> <%= @remote_ip %> | By zeap.io</title>
+    <meta charset='utf-8'>
+    <title><%= @remote_ip %> · IP Info</title>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta name='color-scheme' content='light dark'>
     <link rel='stylesheet' type='text/css' href='/stylesheets/application.css'>
-    <script type='text/javascript' src='/javascript/init_map.js'></script>
-  <head>
-
+    <script src='/javascript/init_map.js' defer></script>
+  </head>
   <body>
     <%= yield %>
   </body>
