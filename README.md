@@ -94,6 +94,8 @@ docker run -p 80:4567 ip
 ./build_push.sh
 ```
 
+Every push to `main` also builds and pushes `ghcr.io/samuelvaneck/ip_info:latest` via GitHub Actions.
+
 ## Run in development
 
 ```

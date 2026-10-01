@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby '3.4.2'
+ruby '4.0.7'
 
 gem 'maxmind-db'
 gem 'puma'
